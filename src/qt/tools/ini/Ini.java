@@ -84,9 +84,9 @@ public class Ini extends IniSection{
     }
 
 	public void store(File file){
-		
+        IniPrintWriter writer = null;
 		try {
-			IniPrintWriter writer = new IniPrintWriter(file);
+			writer = new IniPrintWriter(file);
 
 			writer.printNotes(genIniHeader());
             writer.println(2);
@@ -102,8 +102,11 @@ public class Ini extends IniSection{
 			writer.close();
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-	}
+		} finally {
+		    if(writer!=null)
+		        writer.close();
+        }
+    }
 	
 	public void store(){
 		store(ini);
