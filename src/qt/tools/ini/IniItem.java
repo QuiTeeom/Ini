@@ -1,21 +1,27 @@
 package qt.tools.ini;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IniItem {
 	private String key;
 	private String value;
 	private boolean isKV;
-	
-	public IniItem(String key,String value) {
+	private List<NoteLine> noteLines = new ArrayList<>();
+
+	public IniItem(String key,String value,List<NoteLine> noteLines) {
 		this.key = key;
 		this.value = value;
 		this.isKV = true;
+		this.noteLines = noteLines;
 	}
-	public IniItem(String key) {
+	public IniItem(String key,List<NoteLine> noteLines) {
 		this.key = key;
 		this.value = null;
 		this.isKV = false;
+		this.noteLines = noteLines;
 	}
-	
+
 	public String getKey() {
 		return key;
 	}
@@ -38,5 +44,9 @@ public class IniItem {
 	@Override
 	public String toString() {
 		return isKV?(key+"="+value):key;
+	}
+
+	public List<NoteLine> getNoteLines() {
+		return noteLines;
 	}
 }
